@@ -1,0 +1,20 @@
+version: '3'
+services:
+  registry:
+    image: registry:${REGISTRY_VERSION}
+    ports:
+     - "5001:5000"
+
+  docker-hub:
+    image: registry:${REGISTRY_VERSION}
+    ports:
+     - "5002:5000"
+    volumes:
+     - ./registry/conf/docker-hub-mirror-config.yml:/etc/docker/registry/config.yml
+
+  mcr:
+    image: registry:${REGISTRY_VERSION}
+    ports:
+     - "5003:5000"
+    volumes:
+     - ./registry/conf/mcr-mirror-config.yml:/etc/docker/registry/config.yml
